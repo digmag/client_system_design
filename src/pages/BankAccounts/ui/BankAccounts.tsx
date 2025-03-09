@@ -120,9 +120,9 @@ export function BankAccounts() {
                                             placeholder="Сумма"
                                             min={0}
                                         />
-                                        <Button onClick={() => handleAction(bill.id, 'topup')}>Пополнить</Button>
-                                        <Button onClick={() => handleAction(bill.id, 'topdown')}>Снять</Button>
-                                        <Button onClick={() => handleAction(bill.id, 'close')}>Закрыть</Button>
+                                        <Button onClick={() => handleAction(bill.id, 'topup')} color="teal">Пополнить</Button>
+                                        <Button onClick={() => handleAction(bill.id, 'topdown')} color="violet">Снять</Button>
+                                        <Button onClick={() => handleAction(bill.id, 'close')} color="gray">Закрыть</Button>
                                         </>
                                     )}
                                     </Group>

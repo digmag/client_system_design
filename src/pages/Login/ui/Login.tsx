@@ -1,6 +1,5 @@
 import { useForm, Controller } from "react-hook-form";
 import { TextInput, Select, Button, PasswordInput, Box, LoadingOverlay, Title, Paper } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { useLazyAutorizationQuery } from "../api/api";
 import { AutorizationFormProps } from "../api/data";
 import { useNavigate } from "react-router-dom"; 
@@ -14,17 +13,17 @@ export function Login() {
     const { isAuth, setIsAuth } = useMyContext();
 
     const { handleSubmit, reset, control, formState: { errors, isValid } } = useForm({
-        mode: 'onChange', // Устанавливаем режим валидации на 'onChange'
+        mode: 'onChange',
         defaultValues: {
             email : "",
             password: "",
         } 
     });
     const [trigger] = useLazyAutorizationQuery()
-    const [loading, setLoading] = useState(false); // Создаем состояние для загрузки
+    const [loading, setLoading] = useState(false);
 
     const onSubmit = (values: AutorizationFormProps) => {
-        setLoading(true); // Включаем загрузку
+        setLoading(true);
         trigger(values).unwrap().then(data => {
             localStorage.setItem("refresh", data.refreshToken);
             sessionStorage.setItem("access", data.accessToken);
@@ -35,7 +34,7 @@ export function Login() {
             console.log("Не удалось войти", values);
             toast.error("Не удалось войти");
         }).finally(() => {
-            setLoading(false); // Отключаем загрузку в любом случае
+            setLoading(false);
         });
     };
     
@@ -59,7 +58,6 @@ export function Login() {
                 label="Логин"
                 placeholder="Введите ваш логин"
                 mt="xs"
-                // error={errors.username && errors.email.message}
                 />
             )}
             />
@@ -75,7 +73,6 @@ export function Login() {
                 label="Пароль"
                 placeholder="Введите ваш пароль"
                 mt="xs"
-                // error={errors.password && errors.password.message}
                 />
             )}
             />

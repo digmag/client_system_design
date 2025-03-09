@@ -1,5 +1,15 @@
+import { Container, Paper } from "@mantine/core";
+import { CreditCreateForm } from "../Form";
+import { Actual } from "../Actual";
+
 export function Loans() {
     return (
-        <div>Loansssssssssssss</div>
+        <Paper shadow="xs" p="xl" style={{ width: '66vw' }}>
+            <Container>
+                <Actual />
+                <CreditCreateForm />
+            </Container>
+        </Paper>
+        
     )
 }
