@@ -1,5 +1,4 @@
-import { TextInput, NumberInput, Button, Modal, Box, LoadingOverlay, Title, Paper, Table, Group } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { TextInput, NumberInput, Button, Title, Paper, Table, Group } from "@mantine/core";
 import { useCloseBillMutation, useCreateBillMutation, useGetMyBillsQuery, useTopDownBillMutation, useTopUpBillMutation } from "../api/api";
 import { CreateBillRequest } from "../api/types";
 import { toast } from "react-toastify";
@@ -20,10 +19,6 @@ export function BankAccounts() {
     const [billName, setBillName] = useState(""); 
 
     const [amounts, setAmounts] = useState<{ [key: string]: number }>({});
-    const [selectedBillId, setSelectedBillId] = useState(null);
-    const [action, setAction] = useState(null); // 'topup', 'topdown', 'close'
-
-    const [visible] = useDisclosure(false);
 
     function handleCreateBill(values: CreateBillRequest) {
         console.log("creaaaate");

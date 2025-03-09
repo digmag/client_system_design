@@ -39,8 +39,6 @@ export function Login() {
     };
     
 
-    
-
     return (
         <Paper shadow="xs" p="xl" style={{ width: '30vw' }}>
             <LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
