@@ -12,7 +12,6 @@ export function Layout() {
       </AppShell.Header>
 
       <AppShell.Main m="xl">
-       
         <Outlet />
       </AppShell.Main>
     </AppShell>

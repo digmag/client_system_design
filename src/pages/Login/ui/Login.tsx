@@ -4,10 +4,14 @@ import { useDisclosure } from "@mantine/hooks";
 import { useLazyAutorizationQuery } from "../api/api";
 import { AutorizationFormProps } from "../api/data";
 import { useNavigate } from "react-router-dom"; 
+import { useMyContext } from "../../../app/contexts";
+import { toast } from "react-toastify"
+import { useState } from "react";
 
 export function Login() {
 
     const navigate = useNavigate();
+    const { isAuth, setIsAuth } = useMyContext();
 
     const { handleSubmit, reset, control, formState: { errors, isValid } } = useForm({
         mode: 'onChange', // Устанавливаем режим валидации на 'onChange'
@@ -17,19 +21,22 @@ export function Login() {
         } 
     });
     const [trigger] = useLazyAutorizationQuery()
-    const [visible, { toggle }] = useDisclosure(false);
+    const [loading, setLoading] = useState(false); // Создаем состояние для загрузки
 
     const onSubmit = (values: AutorizationFormProps) => {
-        toggle();
-        trigger(values).unwrap().then(data=>{
-            localStorage.setItem("refresh", data.refreshToken)
-            sessionStorage.setItem("access", data.accessToken)
-            console.log("Успешно вошли")
+        setLoading(true); // Включаем загрузку
+        trigger(values).unwrap().then(data => {
+            localStorage.setItem("refresh", data.refreshToken);
+            sessionStorage.setItem("access", data.accessToken);
+            console.log("Успешно вошли");
+            setIsAuth(true);
             navigate('/loans');
-        }).catch(error=>{
-            console.log("Не удалось войти", values)
-            
-        })
+        }).catch(error => {
+            console.log("Не удалось войти", values);
+            toast.error("Не удалось войти");
+        }).finally(() => {
+            setLoading(false); // Отключаем загрузку в любом случае
+        });
     };
     
 
@@ -37,7 +44,7 @@ export function Login() {
 
     return (
         <Paper shadow="xs" p="xl" style={{ width: '30vw' }}>
-            <LoadingOverlay visible={visible} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
+            <LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
             <Title order={2}>Вход</Title>
             <form onSubmit={handleSubmit(onSubmit)}>
 

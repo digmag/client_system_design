@@ -2,6 +2,7 @@ export const ROUTES = {
     MAIN: "/",
     LOGIN: "/login",
     LOANS: "/loans",
-    BANKACCOUNTS: "/bank-accounts"
+    BANKACCOUNTS: "/bank-accounts",
+    BILLHISTORY: "/bill-history/:id"
     
   }

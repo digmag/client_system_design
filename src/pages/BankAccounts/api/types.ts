@@ -11,3 +11,15 @@ export interface CreateBillResponse{
     status: string,
     name: string
 }
+
+type BillType = "SAVING" | "NORMAL" | "CREDIT";
+type BillStatus = "OPEN" | "CLOSED" | "BLOCKED";
+
+export interface Bill{
+    id: string,
+    userId: string,
+    amount: number,
+    type: BillType,
+    status: BillStatus,
+    name: string
+}

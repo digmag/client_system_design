@@ -5,6 +5,7 @@ import { Main } from "../../pages/Main";
 import { Layout } from "../layouts";
 import { Loans } from "../../pages/Loans/ui/Loans";
 import { BankAccounts } from "../../pages/BankAccounts/ui/BankAccounts";
+import { BillHistory } from "../../pages/BillHistory/ui/BillHistory";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +28,12 @@ const router = createBrowserRouter([
               path: ROUTES.BANKACCOUNTS,
               element: <BankAccounts />,
             },
+
+            {
+              path: ROUTES.BILLHISTORY,
+              element: <BillHistory />,
+            },
+
           ],
         
     }
