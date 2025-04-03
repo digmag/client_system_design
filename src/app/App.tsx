@@ -2,15 +2,13 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { AppRouter } from './routers'
 import '@mantine/core/styles.css';
-import { MantineProvider } from '@mantine/core';
 import { Provider } from 'react-redux'
 import { store } from './stores/store';
 import { MyContext } from './contexts';
 import { ToastContainer } from 'react-toastify';
+import { MantineProvider } from '@mantine/core';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
@@ -22,11 +20,10 @@ function App() {
     <>
     <Provider store={store}>
       <MyContext.Provider value={{isAuth, setIsAuth}}>
-        <MantineProvider>
-          <AppRouter />
-          <ToastContainer/>
-        </MantineProvider>
-        
+      <MantineProvider>
+        <AppRouter />
+        <ToastContainer/>
+      </MantineProvider>
       </MyContext.Provider>
       
     </Provider>

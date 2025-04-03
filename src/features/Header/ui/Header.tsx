@@ -2,6 +2,7 @@ import { NavLink, Container, Burger, Flex } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import classes from './Header.module.css';
 import { useMyContext } from '../../../app/contexts';
+import { ThemeSwitcher } from '../../ThemeSwitcher';
 
 export function Header() {
 
@@ -49,7 +50,7 @@ export function Header() {
           )}
 
         </Flex>
-
+          <ThemeSwitcher />
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
       </Container>
    
