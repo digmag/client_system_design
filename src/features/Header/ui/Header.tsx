@@ -1,8 +1,9 @@
 import { NavLink, Container, Burger, Flex } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import classes from './Header.module.css';
-import { useMyContext } from '../../../app/contexts';
 import { ThemeSwitcher } from '../../ThemeSwitcher';
+import { useMyContext } from '../../../shared/lib';
+import { Link } from 'react-router-dom';
 
 export function Header() {
 
@@ -11,7 +12,7 @@ export function Header() {
     const [opened, { toggle }] = useDisclosure(false);
     
     const handleLogout = () => {
-        localStorage.removeItem("refresh"); 
+        localStorage.clear(); 
         sessionStorage.clear(); 
         setIsAuth(false);
     };
@@ -25,21 +26,21 @@ export function Header() {
 
           {isAuth && (
               <>
-                  <NavLink
-                      href="/bank-accounts"
-                      label="Счета"   
-                  />
-                  <NavLink
-                      href="/loans"
-                      label="Кредиты"
-                  />
+                <Flex gap='md' align='center'>
+                  <Link
+                      to="/bank-accounts"
+                  >Счета</Link>
+                  <Link
+                      to="/loans"
+                  >Кредиты</Link>
+                </Flex>
               </>
           )}
 
           {!isAuth ? (
               <NavLink
-                  href="/login"
-                  label="Вход"
+                  href="http://localhost:5174?appId=client&redirectURI=http://localhost:5173/login/finish"
+                  label="Вход через SSO"
               />
           ) : (
               <NavLink

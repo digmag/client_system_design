@@ -6,6 +6,7 @@ import { Layout } from "../layouts";
 import { Loans } from "../../pages/Loans/ui/Loans";
 import { BankAccounts } from "../../pages/BankAccounts/ui/BankAccounts";
 import { BillHistory } from "../../pages/BillHistory/ui/BillHistory";
+import { LoginFinish } from "../../pages/LoginFinish";
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
             {
                 path: ROUTES.LOGIN,
                 element: <Login />,
+            },
+            {
+              path: ROUTES.LOGIN_FINISH,
+              element: <LoginFinish />,
             },
             {
               path: ROUTES.LOANS,
