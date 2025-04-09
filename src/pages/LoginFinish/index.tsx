@@ -1,8 +1,10 @@
 import { useLoginFinish } from "../../widgets/LoginFinish/hook"
 
-export const LoginFinish = () => {
-    useLoginFinish()
+const LoginFinish = () => {
+    const {Component} = useLoginFinish()
     return (
-        <></>
+        <><Component /></>
     )
 }
+
+export default LoginFinish

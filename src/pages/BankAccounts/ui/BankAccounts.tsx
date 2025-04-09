@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-export function BankAccounts() {
+export default function BankAccounts() {
 
     const { data: bills, isLoading, isError } = useGetMyBillsQuery();
 
