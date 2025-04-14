@@ -4,17 +4,23 @@ import classes from './Header.module.css';
 import { ThemeSwitcher } from '../../ThemeSwitcher';
 import { useMyContext } from '../../../shared/lib';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useSetThemeMutation } from '../../../shared/api/theme';
 
 export function Header() {
 
-    const { isAuth, setIsAuth } = useMyContext();
-    
+    const { isAuth, setIsAuth } = useMyContext();  
     const [opened, { toggle }] = useDisclosure(false);
+
+    const [setThemeTrigger] = useSetThemeMutation();
+    const [checked, setChecked] = useState(false);
     
     const handleLogout = () => {
-        localStorage.clear(); 
-        sessionStorage.clear(); 
-        setIsAuth(false);
+      setThemeTrigger({theme:localStorage.getItem('mantine-color-scheme-value')!})
+      setChecked(false)
+      localStorage.clear(); 
+      sessionStorage.clear(); 
+      setIsAuth(false);
     };
 
     return (
@@ -51,7 +57,8 @@ export function Header() {
           )}
 
         </Flex>
-          <ThemeSwitcher />
+        {isAuth?<ThemeSwitcher />:<></>}
+        
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
       </Container>
    
