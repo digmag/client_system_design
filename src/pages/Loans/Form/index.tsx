@@ -1,25 +1,9 @@
-import { Controller, useForm } from "react-hook-form"
-import { CreateCreditFormProps } from "./data"
+import { Controller } from "react-hook-form"
 import { Button, Flex, Select, TextInput, Title } from "@mantine/core"
-import { useGetMyBillsQuery } from "../../BankAccounts/api/api"
-import { useCreateCreditBillMutation } from "../api"
-import { toast } from "react-toastify"
-import { useNavigate } from "react-router-dom"
-import { ROUTES } from "../../../shared/consts"
+import { useCreateForm } from "../hooks"
 
 export const CreditCreateForm = () => {
-    const { data } = useGetMyBillsQuery()
-    const [trigger] = useCreateCreditBillMutation()
-    const navigate = useNavigate()
-    const {control, formState:{isValid}, handleSubmit} = useForm<CreateCreditFormProps>()
-    const onSubmit = (vals:CreateCreditFormProps) => {
-        trigger(vals).unwrap().then(data => {
-            navigate(ROUTES.BANKACCOUNTS)
-            toast.success("Создан кредитный счет")
-        }).catch(() => {
-            toast.error('Не удалось создать кредитный счет')
-        })
-    }
+    const {handleSubmit, onSubmit, control, data, isValid} = useCreateForm();
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Flex direction='column' gap='sm'>

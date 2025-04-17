@@ -1,1 +1,0 @@
-export { MyContext, useMyContext } from "./context"
