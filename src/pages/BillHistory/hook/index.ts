@@ -24,6 +24,9 @@ export const useWsTransactions = (id: string) => {
             setState((prew) => [...prew, JSON.parse(event.data) as Transaction])
             
         }
+        return () => {
+            ws.close()
+        }
     },[data])
 
     return {
