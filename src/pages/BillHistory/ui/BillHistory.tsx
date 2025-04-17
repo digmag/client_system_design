@@ -1,12 +1,9 @@
 import { Flex, Title, Box, Text, Group, Button, SimpleGrid } from "@mantine/core"
-import { useNavigate, useParams } from "react-router-dom"
-import { useGetAllTransactionsQuery } from "../api/api"
 import { TransactionBlock } from "../../../entities/transaction/TransactionBlock"
+import { useBillHistory } from "../hook";
 
-export const BillHistory = () => {
-    const {id}=useParams()
-    const {data, isLoading} = useGetAllTransactionsQuery(id!);
-    const nav = useNavigate()
+export default function BillHistory() {
+    const {nav, isLoading, data} = useBillHistory();
     if(isLoading){
         return(<h1>Загрузка</h1>)
     }

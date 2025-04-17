@@ -1,40 +1,23 @@
 import { NavLink, Container, Burger, Flex } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
 import classes from './Header.module.css';
-import { useMyContext } from '../../../app/contexts';
+import { ThemeSwitcher } from '../../ThemeSwitcher';
+import { Link } from 'react-router-dom';
+import { useHeader } from '../hooks';
 
 export function Header() {
-
-    const { isAuth, setIsAuth } = useMyContext();
-    
-    const [opened, { toggle }] = useDisclosure(false);
-    
-    const handleLogout = () => {
-        localStorage.removeItem("refresh"); 
-        sessionStorage.clear(); 
-        setIsAuth(false);
-    };
-
+   const {isAuth, opened, toggle, handleLogout} = useHeader();
     return (
-     
       <Container size="md" className={classes.inner}>
         Кусь-банк
-        
         <Flex>
-
           {isAuth && (
               <>
-                  <NavLink
-                      href="/bank-accounts"
-                      label="Счета"   
-                  />
-                  <NavLink
-                      href="/loans"
-                      label="Кредиты"
-                  />
+                <Flex gap='md' align='center'>
+                  <Link to="/bank-accounts">Счета</Link>
+                  <Link to="/loans">Кредиты</Link>
+                </Flex>
               </>
           )}
-
           {!isAuth ? (
               <NavLink
                   href="/login"
@@ -47,9 +30,8 @@ export function Header() {
                   onClick={handleLogout}
               />
           )}
-
         </Flex>
-
+        {isAuth?<ThemeSwitcher />:<></>}
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
       </Container>
    
