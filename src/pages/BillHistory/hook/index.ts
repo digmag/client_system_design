@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import { Transaction, useGetAllTransactionsQuery } from "../api/api"
+import { useGetMyBillsQuery } from "../../BankAccounts/api/api"
 
 const ws = new WebSocket(`ws://localhost:8080/api/ws?token=${sessionStorage.getItem('access')}`)
 
 export const useWsTransactions = (id: string) => {
     const [state, setState] = useState<Array<Transaction>>([])
-    const {data, isLoading} = useGetAllTransactionsQuery(id!)
+    const {data, isLoading, refetch} = useGetAllTransactionsQuery(id!)
+    const {refetch:billRefetch} = useGetMyBillsQuery()
     useEffect(() => {
         if(data){
             setState([...data])
@@ -17,10 +19,12 @@ export const useWsTransactions = (id: string) => {
             console.log("соединение установлено")
         }
         ws.onmessage = event => {
-            console.log(event.data)
-            setState([...state, event.data as Transaction])
+            refetch()
+            billRefetch()
+            setState((prew) => [...prew, JSON.parse(event.data) as Transaction])
+            
         }
-    },[])
+    },[data])
 
     return {
         isLoading,
