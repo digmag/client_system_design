@@ -28,4 +28,3 @@ const theme = injectToApi({
 })
 
 export const {useLazyGetThemeQuery, useSetThemeMutation} = theme
-export const {useLazyGetThemeQuery, useSetThemeMutation} = theme
