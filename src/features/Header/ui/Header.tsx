@@ -20,8 +20,8 @@ export function Header() {
           )}
           {!isAuth ? (
               <NavLink
-                  href="/login"
-                  label="Вход"
+                  href="http://localhost:7000?appId=client&redirectURI=http://localhost:5173/login/finish"
+                  label="Вход через SSO"
               />
           ) : (
               <NavLink

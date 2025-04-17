@@ -1,9 +1,11 @@
 import { AppShell } from "@mantine/core"
 import { Outlet } from "react-router-dom"
 import { Header } from "../../features/Header"
+import { AuthProvider } from "../../shared/lib"
 
 export function Layout() {
   return (
+    <AuthProvider>
     <AppShell>
       <AppShell.Header>
         <Header />
@@ -12,5 +14,6 @@ export function Layout() {
         <Outlet />
       </AppShell.Main>
     </AppShell>
+    </AuthProvider>
   )
 }

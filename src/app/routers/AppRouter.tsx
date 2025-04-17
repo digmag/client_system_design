@@ -1,11 +1,14 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ROUTES } from "../../shared/consts";
 import { Login } from "../../pages/Login";
-import { Main } from "../../pages/Main";
 import { Layout } from "../layouts";
-import { Loans } from "../../pages/Loans/ui/Loans";
-import { BankAccounts } from "../../pages/BankAccounts/ui/BankAccounts";
-import { BillHistory } from "../../pages/BillHistory/ui/BillHistory";
+import { lazy } from "react";
+
+const Main = lazy(()=>import('../../pages/Main/ui/Main'))
+const Loans = lazy(()=>import('../../pages/Loans/ui/Loans'))
+const LoginFinish = lazy(()=>import('../../pages/LoginFinish/index'))
+const BankAccounts = lazy(()=>import('../../pages/BankAccounts/ui/BankAccounts'))
+const BillHistory = lazy(()=>import('../../pages/BillHistory/ui/BillHistory'))
 
 const router = createBrowserRouter([
     {
@@ -19,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: ROUTES.LOGIN,
                 element: <Login />,
+            },
+            {
+              path: ROUTES.LOGIN_FINISH,
+              element: <LoginFinish />,
             },
             {
               path: ROUTES.LOANS,
