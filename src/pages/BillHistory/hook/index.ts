@@ -21,11 +21,8 @@ export const useWsTransactions = (id: string) => {
         ws.onmessage = event => {
             refetch()
             billRefetch()
-            setState((prew) => [...prew, JSON.parse(event.data) as Transaction])
+            // setState((prew) => [...prew, JSON.parse(event.data) as Transaction])
             
-        }
-        return () => {
-            ws.close()
         }
     },[data])
 
