@@ -1,4 +1,4 @@
-import { Flex, Title, Box, Text, Group, Button, SimpleGrid } from "@mantine/core"
+import { Flex, Title, Box, Group, Button, SimpleGrid } from "@mantine/core"
 import { TransactionBlock } from "../../../entities/transaction/TransactionBlock"
 import { useBillHistory } from "../hook";
 
@@ -20,7 +20,7 @@ export default function BillHistory() {
                 </Group>
             </Box>
             <SimpleGrid cols={1} style={{width:'80%'}}>
-            {data?.map(transaction => {
+            {Object.values(data?.entities || {}).slice().map(transaction => {
                 return (
                     <TransactionBlock 
                     id={transaction.id}
