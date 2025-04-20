@@ -18,16 +18,15 @@
     padding: 8px 12px;
     border-radius: var(--mantine-radius-sm);
     text-decoration: none;
-    color: var(--mantine-color-gray-7); /* Замените на нужный цвет */
+    color: var(--mantine-color-gray-7); 
     font-size: var(--mantine-font-size-sm);
     font-weight: 500;
 }
 
 .link:hover {
-    background-color: var(--mantine-color-gray-0); /* Замените на нужный цвет */
+    background-color: var(--mantine-color-gray-0); 
 }
 
-/* Исправленный селектор */
 [data-mantine-color-scheme] .link[data-active] {
     background-color: var(--mantine-color-blue-filled);
     color: var(--mantine-color-white);
