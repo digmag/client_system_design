@@ -1,9 +1,13 @@
 import { Switch, Box, Flex } from "@mantine/core"
 import { SunHigh, Moon } from 'tabler-icons-react';
+import { useThemeProvider } from "../../shared/lib/ThemeProvider";
+import { useMyContext } from "../../shared/lib";
+import { useLazyGetThemeQuery, useSetThemeMutation } from "../../shared/api/theme";
 import { useThemeSwitcher } from "./hooks";
 
 export const ThemeSwitcher = () => {
     const {checked, setChecked} = useThemeSwitcher();
+
     return (
         <Box>
             <Flex align="center" style={{justifyContent:'center'}}>

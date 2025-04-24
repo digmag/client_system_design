@@ -20,15 +20,14 @@ export const useThemeSwitcher = () => {
 
     useEffect(()=>{
         setColorScheme(checked?'dark':'light')
-        const theme = checked?'dark':'light'
-        setThemeTrigger({theme:theme})
-        console.log(checked)
+        //const theme = checked?'dark':'light'
+        // setThemeTrigger({theme:theme})
+        // console.log(checked)
     }, [checked])
 
     useEffect(() =>{
         if(isAuth){
             trigger().unwrap().then(data => {
-                console.log(data)
                 setColorScheme(data.theme as MantineColorScheme)
                 setChecked(data.theme==='dark'?true:false)
             })
@@ -36,21 +35,29 @@ export const useThemeSwitcher = () => {
         else{
             localStorage.clear()
             sessionStorage.clear()
-            setChecked(false)
         }
     }, [isAuth])
 
-    useEffect(()=>{
+    useEffect(() => {
         const handleBeforeUnload = () => {
+            const theme = localStorage.getItem("mantine-color-scheme-value");
+            if (theme) {
+                const data = new Blob(
+                    [JSON.stringify({ theme })],
+                    { type: "application/json" }
+                );
+                navigator.sendBeacon(`http://185.103.70.190:8080/api/theme/post?token=${sessionStorage.getItem('access')}`, data);
+            }
             localStorage.clear()
             sessionStorage.clear()
             setChecked(false)
-        }
+        }    
         window.addEventListener('beforeunload', handleBeforeUnload);
-        return() => {
-        window.removeEventListener('beforeunload', handleBeforeUnload);
-        }
-    },[])
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, []);
+
     return{
         checked, setChecked
     }
