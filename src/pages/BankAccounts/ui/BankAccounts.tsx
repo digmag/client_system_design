@@ -1,11 +1,11 @@
-import { TextInput, NumberInput, Button, Title, Paper, Table, Group } from "@mantine/core";
+import { TextInput, NumberInput, Button, Title, Paper, Table, Group, Container } from "@mantine/core";
 import { useBankAccount } from "../hooks";
 
 
 export default function BankAccounts() {
     const {billName, setBillName, handleCreateBill, isLoading, bills, navigate, amounts, setAmounts, handleAction, isError} = useBankAccount();
     return (
-        <Paper shadow="xs" p="xl" style={{ width: '66vw' }}>
+        <Container p="xl" fluid>
            
             <Title order={2}>Мои счета</Title>
             <div>
@@ -30,6 +30,7 @@ export default function BankAccounts() {
                 <Table striped highlightOnHover mt="xl">
                     <thead>
                         <tr>
+                            <th>Номер</th>
                             <th>Название счета</th>
                             <th>Тип</th>
                             <th>Статус</th>
@@ -39,11 +40,12 @@ export default function BankAccounts() {
                     <tbody>
                         {bills.map(bill => (
                             <tr key={bill.id}>
+                                <td>{bill.id}</td>
                                 <td onClick={() => navigate(`/bill-history/${bill.id}`)} style={{ cursor: 'pointer', color: 'blue' }}>
                                         {bill.name}
                                     </td>
-                                <td>{bill.type}</td>
-                                <td>{bill.status}</td>
+                                <td>{bill.type === "CREDIT" ? "Кредитный": "Стандартный"}</td>
+                                <td>{bill.status === "BLOCKED" ? "Заблокированный" : bill.status === "OPEN" ? "Открытый": "Закрытый"}</td>
                                 <td>{bill.amount}</td>
                                 <td >
                                     <Group align="flex-end" m="xs">
@@ -68,6 +70,6 @@ export default function BankAccounts() {
                 </Table>
             )}
             </div> 
-        </Paper>
+        </Container>
     )
 }

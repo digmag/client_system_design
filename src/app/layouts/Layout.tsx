@@ -6,11 +6,11 @@ import { AuthProvider } from "../../shared/lib"
 export function Layout() {
   return (
     <AuthProvider>
-    <AppShell>
+    <AppShell w={'100%'}>
       <AppShell.Header>
         <Header />
       </AppShell.Header>
-      <AppShell.Main m="xl">
+      <AppShell.Main w={'100%'} m={'xl'} style={{justifyContent:'center', display:'flex'}}>
         <Outlet />
       </AppShell.Main>
     </AppShell>
