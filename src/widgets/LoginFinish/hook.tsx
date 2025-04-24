@@ -24,6 +24,7 @@ export const useLoginFinish = () => {
 
     const Component = () => {
         if(isSuccess) {
+            console.log(sessionStorage)
             setIsAuth(true)
             return <Navigate to={'/loans'}/>
         }

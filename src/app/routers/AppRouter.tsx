@@ -3,13 +3,13 @@ import { ROUTES } from "../../shared/consts";
 import { Login } from "../../pages/Login";
 import { Layout } from "../layouts";
 import { lazy } from "react";
-import Transaction from "../../pages/Transaction/ui/Transaction";
 
 const Main = lazy(()=>import('../../pages/Main/ui/Main'))
 const Loans = lazy(()=>import('../../pages/Loans/ui/Loans'))
 const LoginFinish = lazy(()=>import('../../pages/LoginFinish/index'))
 const BankAccounts = lazy(()=>import('../../pages/BankAccounts/ui/BankAccounts'))
 const BillHistory = lazy(()=>import('../../pages/BillHistory/ui/BillHistory'))
+const Transaction = lazy(()=>import('../../pages/Transaction/ui/Transaction'))
 
 const router = createBrowserRouter([
     {
