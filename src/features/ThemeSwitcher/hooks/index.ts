@@ -40,19 +40,18 @@ export const useThemeSwitcher = () => {
 
     useEffect(() => {
         const handleBeforeUnload = () => {
-            const theme = localStorage.getItem('mantine-color-scheme-value');
+            const theme = localStorage.getItem("mantine-color-scheme-value");
             if (theme) {
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", "/theme", false); // ← false делает запрос синхронным
-                xhr.setRequestHeader("Content-Type", "application/json");
-                xhr.send(JSON.stringify({ theme }));
+                const data = new Blob(
+                    [JSON.stringify({ theme })],
+                    { type: "application/json" }
+                );
+                navigator.sendBeacon(`http://185.103.70.190:8080/api/theme/post?token=${sessionStorage.getItem('access')}`, data);
             }
-    
-            localStorage.clear();
-            sessionStorage.clear();
-            setChecked(false);
-        };
-    
+            localStorage.clear()
+            sessionStorage.clear()
+            setChecked(false)
+        }    
         window.addEventListener('beforeunload', handleBeforeUnload);
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);

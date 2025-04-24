@@ -4,55 +4,10 @@ import { SunHigh, Moon } from 'tabler-icons-react';
 import { useThemeProvider } from "../../shared/lib/ThemeProvider";
 import { useMyContext } from "../../shared/lib";
 import { useLazyGetThemeQuery, useSetThemeMutation } from "../../shared/api/theme";
+import { useThemeSwitcher } from "./hooks";
 
 export const ThemeSwitcher = () => {
-    const { colorScheme, setColorScheme } = useMantineColorScheme();
-    const [setThemeTrigger] = useSetThemeMutation();
-    const [trigger] = useLazyGetThemeQuery();
-    const { isAuth, setIsAuth } = useMyContext();  
-    
-    const [checked, setChecked] = useState<boolean>(false)
-    useEffect(() => {
-        const theme = localStorage.getItem('mantine-color-scheme-value')
-        setColorScheme(theme as MantineColorScheme)
-        if((theme) === 'dark'){
-            setChecked(true)
-        }
-    },[])
-
-    useEffect(()=>{
-        setColorScheme(checked?'dark':'light')
-        const theme = checked?'dark':'light'
-        setThemeTrigger({theme:theme})
-        console.log(checked)
-    }, [checked])
-
-    useEffect(() =>{
-        if(isAuth){
-            trigger().unwrap().then(data => {
-                console.log(data)
-                setColorScheme(data.theme as MantineColorScheme)
-                setChecked(data.theme==='dark'?true:false)
-            })
-        }
-        else{
-            localStorage.clear()
-            sessionStorage.clear()
-            setChecked(false)
-        }
-    }, [isAuth])
-
-    useEffect(()=>{
-        const handleBeforeUnload = () => {
-            localStorage.clear()
-            sessionStorage.clear()
-            setChecked(false)
-        }
-        window.addEventListener('beforeunload', handleBeforeUnload);
-        return() => {
-        window.removeEventListener('beforeunload', handleBeforeUnload);
-        }
-    },[])
+    const {checked, setChecked} = useThemeSwitcher();
 
     return (
         <Box>
