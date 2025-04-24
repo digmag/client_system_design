@@ -5,8 +5,7 @@ import { useBankAccount } from "../hooks";
 export default function BankAccounts() {
     const {billName, setBillName, handleCreateBill, isLoading, bills, navigate, amounts, setAmounts, handleAction, isError} = useBankAccount();
     return (
-        <Container p="xl" fluid>
-           
+        <Container p="xl" fluid style={{boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", borderRadius:'0 0 2rem 2rem'}}>
             <Title order={2}>Мои счета</Title>
             <div>
                 <Group align="flex-end" m="xl">
@@ -41,12 +40,12 @@ export default function BankAccounts() {
                         {bills.map(bill => (
                             <tr key={bill.id}>
                                 <td>{bill.id}</td>
-                                <td onClick={() => navigate(`/bill-history/${bill.id}`)} style={{ cursor: 'pointer', color: 'blue' }}>
+                                <td onClick={() => navigate(`/bill-history/${bill.id}`)} style={{ cursor: 'pointer', color: 'blue', textAlign:'center'}}>
                                         {bill.name}
                                     </td>
                                 <td>{bill.type === "CREDIT" ? "Кредитный": "Стандартный"}</td>
                                 <td>{bill.status === "BLOCKED" ? "Заблокированный" : bill.status === "OPEN" ? "Открытый": "Закрытый"}</td>
-                                <td>{bill.amount}</td>
+                                <td style={{textAlign:'center'}}>{bill.amount}</td>
                                 <td >
                                     <Group align="flex-end" m="xs">
                                     {bill.status !== 'CLOSED' && (
