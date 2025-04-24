@@ -4,6 +4,7 @@ export const ROUTES = {
     LOGIN_FINISH: "/login/finish",
     LOANS: "/loans",
     BANKACCOUNTS: "/bank-accounts",
-    BILLHISTORY: "/bill-history/:id"
+    BILLHISTORY: "/bill-history/:id",
+    TRANSACTION: "/transaction",
     
   }

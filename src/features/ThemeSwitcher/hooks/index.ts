@@ -46,7 +46,7 @@ export const useThemeSwitcher = () => {
                     [JSON.stringify({ theme })],
                     { type: "application/json" }
                 );
-                navigator.sendBeacon(`http://185.103.70.190:8080/api/theme/post?token=${sessionStorage.getItem('access')}`, data);
+                navigator.sendBeacon(`http://localhost:8080/api/theme/post?token=${sessionStorage.getItem('access')}`, data);
             }
             localStorage.clear()
             sessionStorage.clear()

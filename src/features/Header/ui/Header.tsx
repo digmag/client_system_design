@@ -15,6 +15,7 @@ export function Header() {
                 <Flex gap='md' align='center'>
                   <Link to="/bank-accounts">Счета</Link>
                   <Link to="/loans">Кредиты</Link>
+                  <Link to="/transaction">Переводы</Link>
                 </Flex>
               </>
           )}

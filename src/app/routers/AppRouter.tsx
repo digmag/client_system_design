@@ -3,6 +3,7 @@ import { ROUTES } from "../../shared/consts";
 import { Login } from "../../pages/Login";
 import { Layout } from "../layouts";
 import { lazy } from "react";
+import Transaction from "../../pages/Transaction/ui/Transaction";
 
 const Main = lazy(()=>import('../../pages/Main/ui/Main'))
 const Loans = lazy(()=>import('../../pages/Loans/ui/Loans'))
@@ -39,6 +40,11 @@ const router = createBrowserRouter([
             {
               path: ROUTES.BILLHISTORY,
               element: <BillHistory />,
+            },
+
+            {
+              path: ROUTES.TRANSACTION,
+              element: <Transaction />,
             },
 
           ],
