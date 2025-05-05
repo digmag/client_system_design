@@ -3,11 +3,13 @@ import { useCloseBillMutation, useCreateBillMutation, useGetMyBillsQuery, useTop
 import { CreateBillRequest } from "../api/types";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { keyGen } from "../../../shared/lib/KeyGen";
 
 export const useBankAccount = () => {
-    const { data: bills, isLoading, isError } = useGetMyBillsQuery();
+    const { data: bills, isLoading, isError, isSuccess } = useGetMyBillsQuery();
     
         const [createBill] = useCreateBillMutation();
+        console.log(keyGen.currentKey)
     
         const [topUpBill] = useTopUpBillMutation();
         const [topDownBill] = useTopDownBillMutation();
@@ -17,8 +19,9 @@ export const useBankAccount = () => {
     
         const [amounts, setAmounts] = useState<{ [key: string]: number }>({});
     
-        function handleCreateBill(values: CreateBillRequest) {        
+        function handleCreateBill(values: CreateBillRequest) {   
             const response = createBill(values).unwrap().then(data => {
+                console.log(response)
                 toast.success("Счет успешно создан");
                 console.log("Счет создан:", response);
                 setBillName("");
@@ -31,21 +34,21 @@ export const useBankAccount = () => {
         const handleAction = (billId: any, actionType: any) => {
             const amount = amounts[billId] || 0; // Получаем сумму для конкретного счета
             if (actionType === 'topup') {
-                topUpBill({ id: billId, amount }).unwrap().then(() => {
+                topUpBill({ id: billId, amount}).unwrap().then(() => {
                     toast.success("Счет успешно пополнен");
                 }).catch(error => {
                     console.error("Ошибка при пополнении счета:", error);
                     toast.error("Не удалось пополнить счет");
                 });
             } else if (actionType === 'topdown') {
-                topDownBill({ id: billId, amount }).unwrap().then(() => {
+                topDownBill({ id: billId, amount}).unwrap().then(() => {
                     toast.success("Счет успешно снят");
                 }).catch(error => {
                     console.error("Ошибка при снятии со счета:", error);
                     toast.error("Не удалось снять со счета");
                 });
             } else if (actionType === 'close') {
-                closeBill({ id: billId }).unwrap().then(() => {
+                closeBill({ id: billId}).unwrap().then(() => {
                     toast.success("Счет успешно закрыт");
                 }).catch(error => {
                     console.error("Ошибка при закрытии счета:", error);
@@ -55,7 +58,6 @@ export const useBankAccount = () => {
         };
     
         const navigate = useNavigate();
-
         return{
             billName, setBillName, handleCreateBill, isLoading, bills, navigate, amounts, setAmounts, handleAction, isError
         }
