@@ -3,6 +3,19 @@ import { Navigate, useSearchParams } from "react-router-dom"
 import { useMyContext } from "../../shared/lib"
 import { useLazyFinishLoginQuery } from "./api"
 import { Title } from "@mantine/core"
+import { requestPermissions } from "../../shared/firebase/messaging"
+
+function register() {
+    if (navigator.serviceWorker.controller === null) {
+        navigator.serviceWorker.register('../firebase-messaging-sw.js').then(() => {
+            requestPermissions()
+        }).catch(err => console.error(err))
+    }
+    else {
+        requestPermissions()
+    }
+
+}
 
 export const useLoginFinish = () => {
     const [params] = useSearchParams()
@@ -19,12 +32,12 @@ export const useLoginFinish = () => {
         if(data){
             localStorage.setItem('refresh', data.refreshToken)
             sessionStorage.setItem('access', data.accessToken)
+            register()
         }
     },[data])
 
     const Component = () => {
         if(isSuccess) {
-            console.log(sessionStorage)
             setIsAuth(true)
             return <Navigate to={'/loans'}/>
         }

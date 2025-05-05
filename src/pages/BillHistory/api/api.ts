@@ -10,7 +10,7 @@ export interface Transaction{
     to: Bill
     amount: number
 }
-const ws = new WebSocket(`ws://185.103.70.190:8080/api/ws?token=${sessionStorage.getItem('access')}`)
+const ws = new WebSocket(`ws://localhost:8080/api/ws?token=${sessionStorage.getItem('access')}`)
 ws.onopen = e => console.log("открылись", e)
 ws.onclose = (e) => console.log("закрылись",e)
 ws.onerror = e => console.log("закрылись",e)
