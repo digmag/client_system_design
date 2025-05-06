@@ -2,7 +2,7 @@ import { BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta } from 
 import { fetchBaseQuery } from "@reduxjs/toolkit/query"
 import { keyGen } from "../../lib/KeyGen";
 
-const baseUrl = 'http://localhost:8080';
+const baseUrl = 'http://185.103.70.190:8080';
 
 export const fetchBaseQueryRefreshToken: BaseQueryFn<
   FetchArgs,
