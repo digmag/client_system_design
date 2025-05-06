@@ -1,8 +1,8 @@
 import { injectToApi } from "../../../shared/api/api";
-import { CreateBillRequest, CreateBillResponse, Bill } from "./types";
+import { keyGen } from "../../../shared/lib/KeyGen";
+import { CreateBillRequest, CreateBillResponse, Bill, CreateBillRequestIK } from "./types";
 
 const token = sessionStorage.getItem('access');
-console.log("aaaa", token)
 
 const createBill = injectToApi({
    
@@ -14,7 +14,8 @@ const createBill = injectToApi({
                 method: 'POST',
                 body: body,
                 headers: {
-                    Authorization: `Bearer ${token}` 
+                    Authorization: `Bearer ${token}`,
+                    ik : keyGen.currentKey
                 }
             }),
             invalidatesTags: ["Bills"] 
@@ -37,7 +38,8 @@ const createBill = injectToApi({
                 method: 'POST',
                 body: { amount },
                 headers: {
-                    Authorization: `Bearer ${token}` 
+                    Authorization: `Bearer ${token}`,
+                    ik: keyGen.currentKey
                 }
             }),
             invalidatesTags: ["Bills"]
@@ -49,7 +51,8 @@ const createBill = injectToApi({
                 method: 'POST',
                 body: { amount },
                 headers: {
-                    Authorization: `Bearer ${token}` 
+                    Authorization: `Bearer ${token}`,
+                    ik: keyGen.currentKey
                 }
             }),
             invalidatesTags: ["Bills"]
@@ -60,7 +63,8 @@ const createBill = injectToApi({
                 url: `/api/core/bill/${id}/close`,
                 method: 'PATCH',
                 headers: {
-                    Authorization: `Bearer ${token}` 
+                    Authorization: `Bearer ${token}`,
+                    ik: keyGen.currentKey
                 }
             }),
             invalidatesTags: ["Bills"]

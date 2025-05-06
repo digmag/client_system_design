@@ -2,6 +2,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useGetMyBillsQuery } from "../../BankAccounts/api/api";
 import { useCreateTransactionMutation } from "../api/api";
+import { v4 as uuid } from 'uuid';
 
 export const useTransaction = () => {
   const [fromAccount, setFromAccount] = useState("");
@@ -30,6 +31,7 @@ export const useTransaction = () => {
         id: fromAccount,
         otherId: recipientAccount,
         amount,
+        ik: uuid()
       }).unwrap();
 
       toast.success("Перевод выполнен успешно!");

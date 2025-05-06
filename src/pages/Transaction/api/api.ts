@@ -7,13 +7,14 @@ const createTransaction = injectToApi({
    
     endpoints: builder => ({
 
-        createTransaction: builder.mutation<any, {id: string, amount: number, otherId: string}>({
-            query: ({ id, amount, otherId}) => ({
+        createTransaction: builder.mutation<any, {id: string, amount: number, otherId: string, ik: string}>({
+            query: ({ id, amount, otherId, ik}) => ({
                 url: `/api/core/bill/transaction/${id}/${otherId}`,
                 method: 'POST',
                 body: { amount },
                 headers: {
-                    Authorization: `Bearer ${token}` 
+                    Authorization: `Bearer ${token}`,
+                    ik: ik
                 }
             }),
             invalidatesTags: ["Bills"] 

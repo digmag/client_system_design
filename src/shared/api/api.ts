@@ -1,9 +1,10 @@
 import {createApi, EndpointDefinitions, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+import { fetchBaseQueryRefreshToken } from './baseQuery';
 
 const baseUrl = 'http://localhost:8080';
 export const api = createApi({
     reducerPath: 'userApi',
-    baseQuery: fetchBaseQuery({baseUrl: baseUrl}),
+    baseQuery: fetchBaseQueryRefreshToken,
     endpoints: ()=>({}),
     tagTypes: ["Bills", "Transactions", "THEME"]
 })

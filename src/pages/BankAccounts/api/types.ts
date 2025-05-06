@@ -3,6 +3,11 @@ export interface CreateBillRequest{
     type: string
 }
 
+export interface CreateBillRequestIK{
+    bill: CreateBillRequest
+    ik: string
+}
+
 export interface CreateBillResponse{
     id: string,
     userId: string,
